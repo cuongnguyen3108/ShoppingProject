@@ -5,6 +5,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import org.testng.annotations.*;
 import pages.BasePage;
@@ -67,7 +68,7 @@ public class AddToCartMultiCaseTest extends BasePage {
         int quantityProduct = 1;
         product.setQuantity(quantityProduct);
         products.add(product);
-        WebElement totalShoppingCart = WaitElement.visible(driver, By.className("shopping_cart_badge"), 10);
+        WebElement totalShoppingCart = WaitElement.visible(driver, By.className("shopping_cart_link"), 10);
         Assert.assertEquals(totalShoppingCart.getText(), products.size() + "", "❌ The total number off products in the cart is incorrect!");
         totalShoppingCart.click();
 
@@ -111,7 +112,7 @@ public class AddToCartMultiCaseTest extends BasePage {
             product.setQuantity(quantityProduct);
             products.add(product);
         }
-        WebElement totalShoppingCart = WaitElement.visible(driver, By.className("shopping_cart_badge"), 10);
+        WebElement totalShoppingCart = WaitElement.visible(driver, By.className("shopping_cart_link"), 10);
         Assert.assertEquals(totalShoppingCart.getText(), products.size() + "", "❌ The total number off products in the cart is incorrect!");
         totalShoppingCart.click();
 
@@ -131,6 +132,8 @@ public class AddToCartMultiCaseTest extends BasePage {
         Assert.assertTrue(listProduct.get(0).isDisplayed(), "No products displayed!");
 
         WebElement totalShoppingCart = WaitElement.visible(driver, By.className("shopping_cart_link"), 10);
+        Assert.assertEquals(totalShoppingCart.getText(), "", "❌ The total number off products in the cart is incorrect!");
+
         totalShoppingCart.click();
 
         Assert.assertEquals(driver.getCurrentUrl(), "https://www.saucedemo.com/cart.html", "Unable to switch pages.");
@@ -173,7 +176,7 @@ public class AddToCartMultiCaseTest extends BasePage {
             product.setQuantity(quantityProduct);
             products.add(product);
         }
-        WebElement totalShoppingCartAdd = WaitElement.visible(driver, By.className("shopping_cart_badge"), 10);
+        WebElement totalShoppingCartAdd = WaitElement.visible(driver, By.className("shopping_cart_link"), 10);
         Assert.assertEquals(totalShoppingCartAdd.getText(), products.size() + "", "❌ The total number off products in the cart is incorrect!");
         int quantityRemove = 3;
         for (int j = 0; j <= quantityRemove - 1; j++) {
@@ -190,11 +193,160 @@ public class AddToCartMultiCaseTest extends BasePage {
             Assert.assertEquals(btnAfterAddToCartProduct.getText(), "Add to cart", "Unable to remove the product.");
             products.removeIf(p -> p.getName().equals(nameProduct.getText()));
         }
-        WebElement totalShoppingCartAddAfterRemove = WaitElement.visible(driver, By.className("shopping_cart_badge"), 10);
+        WebElement totalShoppingCartAddAfterRemove = WaitElement.visible(driver, By.className("shopping_cart_link"), 10);
+        Assert.assertEquals(totalShoppingCartAddAfterRemove.getText(), products.size() + "", "❌ The total number off products in the cart is incorrect!");
 
         Assert.assertEquals(totalShoppingCartAddAfterRemove.getText(), products.size() + "", "❌ The total number off products in the cart is incorrect!");
 
     }
+
+    @Test
+    public void addToCartSortByNameFromZToA() {
+        Assert.assertEquals(driver.getCurrentUrl(), "https://www.saucedemo.com/inventory.html", "Login failed!");
+
+        WebElement appLogo = WaitElement.clickable(driver, By.className("app_logo"), 10);
+        Assert.assertTrue(appLogo.isDisplayed(), "Logo not displayed!");
+
+        List<WebElement> listProduct = WaitElement.visibleElements(driver, By.xpath("//div[@class='inventory_item']"), 10);
+        Assert.assertTrue(listProduct.get(0).isDisplayed(), "No products displayed!");
+        List<Product> productsBeforeSort = new ArrayList<>();
+
+        for (int i = 0; i < productsBeforeSort.size(); i++) {
+            Product product = new Product();
+            WebElement nameProduct = listProduct.get(i).findElement(By.xpath("./descendant::div[@class=\"inventory_item_name \"]"));
+            product.setName(nameProduct.getText());
+            WebElement priceProduct = listProduct.get(i).findElement(By.xpath("./descendant::div[@class=\"inventory_item_price\"]"));
+            String priceNumber = priceProduct.getText().replace("$", "");
+            product.setPrice(Double.parseDouble(priceNumber));
+            WebElement descProduct = listProduct.get(i).findElement(By.xpath("./descendant::div[@class=\"inventory_item_desc\"]"));
+            product.setDesc(descProduct.getText());
+            int quantityProduct = 1;
+            product.setQuantity(quantityProduct);
+            productsBeforeSort.add(product);
+        }
+        WebElement sortProduct = WaitElement.clickable(driver, By.xpath("//select[@class=\"product_sort_container\"]"), 10);
+        Select selectSortProduct = new Select(sortProduct);
+        selectSortProduct.selectByValue("za");
+        List<Product> productsAfterSort = new ArrayList<>();
+        for (int i = 0; i < productsAfterSort.size(); i++) {
+            Product product = new Product();
+            WebElement nameProduct = listProduct.get(i).findElement(By.xpath("./descendant::div[@class=\"inventory_item_name \"]"));
+            product.setName(nameProduct.getText());
+            WebElement priceProduct = listProduct.get(i).findElement(By.xpath("./descendant::div[@class=\"inventory_item_price\"]"));
+            String priceNumber = priceProduct.getText().replace("$", "");
+            product.setPrice(Double.parseDouble(priceNumber));
+            WebElement descProduct = listProduct.get(i).findElement(By.xpath("./descendant::div[@class=\"inventory_item_desc\"]"));
+            product.setDesc(descProduct.getText());
+            int quantityProduct = 1;
+            product.setQuantity(quantityProduct);
+            productsAfterSort.add(product);
+        }
+        for (int i = 0; i < productsAfterSort.size(); i++) {
+            Assert.assertTrue(productsAfterSort.get(i).getPrice() == productsBeforeSort.get(i).getPrice(), "The position remains unchanged.");
+            Assert.assertEquals(productsAfterSort.get(i).getName(), productsBeforeSort.get(i).getName(), "The position remains unchanged.");
+            Assert.assertEquals(productsAfterSort.get(i).getDesc(), productsBeforeSort.get(i).getDesc(), "The position remains unchanged.");
+        }
+
+    }
+
+    @Test
+    public void addToCartSortByPriceFromLowToHigh() {
+        Assert.assertEquals(driver.getCurrentUrl(), "https://www.saucedemo.com/inventory.html", "Login failed!");
+
+        WebElement appLogo = WaitElement.clickable(driver, By.className("app_logo"), 10);
+        Assert.assertTrue(appLogo.isDisplayed(), "Logo not displayed!");
+
+        List<WebElement> listProduct = WaitElement.visibleElements(driver, By.xpath("//div[@class='inventory_item']"), 10);
+        Assert.assertTrue(listProduct.get(0).isDisplayed(), "No products displayed!");
+        List<Product> productsBeforeSort = new ArrayList<>();
+
+        for (int i = 0; i < productsBeforeSort.size(); i++) {
+            Product product = new Product();
+            WebElement nameProduct = listProduct.get(i).findElement(By.xpath("./descendant::div[@class=\"inventory_item_name \"]"));
+            product.setName(nameProduct.getText());
+            WebElement priceProduct = listProduct.get(i).findElement(By.xpath("./descendant::div[@class=\"inventory_item_price\"]"));
+            String priceNumber = priceProduct.getText().replace("$", "");
+            product.setPrice(Double.parseDouble(priceNumber));
+            WebElement descProduct = listProduct.get(i).findElement(By.xpath("./descendant::div[@class=\"inventory_item_desc\"]"));
+            product.setDesc(descProduct.getText());
+            int quantityProduct = 1;
+            product.setQuantity(quantityProduct);
+            productsBeforeSort.add(product);
+        }
+        WebElement sortProduct = WaitElement.clickable(driver, By.xpath("//select[@class=\"product_sort_container\"]"), 10);
+        Select selectSortProduct = new Select(sortProduct);
+        selectSortProduct.selectByValue("lohi");
+        List<Product> productsAfterSort = new ArrayList<>();
+        for (int i = 0; i < productsAfterSort.size(); i++) {
+            Product product = new Product();
+            WebElement nameProduct = listProduct.get(i).findElement(By.xpath("./descendant::div[@class=\"inventory_item_name \"]"));
+            product.setName(nameProduct.getText());
+            WebElement priceProduct = listProduct.get(i).findElement(By.xpath("./descendant::div[@class=\"inventory_item_price\"]"));
+            String priceNumber = priceProduct.getText().replace("$", "");
+            product.setPrice(Double.parseDouble(priceNumber));
+            WebElement descProduct = listProduct.get(i).findElement(By.xpath("./descendant::div[@class=\"inventory_item_desc\"]"));
+            product.setDesc(descProduct.getText());
+            int quantityProduct = 1;
+            product.setQuantity(quantityProduct);
+            productsAfterSort.add(product);
+        }
+        for (int i = 0; i < productsAfterSort.size(); i++) {
+            Assert.assertTrue(productsAfterSort.get(i).getPrice() == productsBeforeSort.get(i).getPrice(), "The position remains unchanged.");
+            Assert.assertEquals(productsAfterSort.get(i).getName(), productsBeforeSort.get(i).getName(), "The position remains unchanged.");
+            Assert.assertEquals(productsAfterSort.get(i).getDesc(), productsBeforeSort.get(i).getDesc(), "The position remains unchanged.");
+        }
+
+    }
+
+    @Test
+    public void addToCartSortByPriceFromHighToLow() {
+        Assert.assertEquals(driver.getCurrentUrl(), "https://www.saucedemo.com/inventory.html", "Login failed!");
+
+        WebElement appLogo = WaitElement.clickable(driver, By.className("app_logo"), 10);
+        Assert.assertTrue(appLogo.isDisplayed(), "Logo not displayed!");
+
+        List<WebElement> listProduct = WaitElement.visibleElements(driver, By.xpath("//div[@class='inventory_item']"), 10);
+        Assert.assertTrue(listProduct.get(0).isDisplayed(), "No products displayed!");
+        List<Product> productsBeforeSort = new ArrayList<>();
+
+        for (int i = 0; i < productsBeforeSort.size(); i++) {
+            Product product = new Product();
+            WebElement nameProduct = listProduct.get(i).findElement(By.xpath("./descendant::div[@class=\"inventory_item_name \"]"));
+            product.setName(nameProduct.getText());
+            WebElement priceProduct = listProduct.get(i).findElement(By.xpath("./descendant::div[@class=\"inventory_item_price\"]"));
+            String priceNumber = priceProduct.getText().replace("$", "");
+            product.setPrice(Double.parseDouble(priceNumber));
+            WebElement descProduct = listProduct.get(i).findElement(By.xpath("./descendant::div[@class=\"inventory_item_desc\"]"));
+            product.setDesc(descProduct.getText());
+            int quantityProduct = 1;
+            product.setQuantity(quantityProduct);
+            productsBeforeSort.add(product);
+        }
+        WebElement sortProduct = WaitElement.clickable(driver, By.xpath("//select[@class=\"product_sort_container\"]"), 10);
+        Select selectSortProduct = new Select(sortProduct);
+        selectSortProduct.selectByValue("hilo");
+        List<Product> productsAfterSort = new ArrayList<>();
+        for (int i = 0; i < productsAfterSort.size(); i++) {
+            Product product = new Product();
+            WebElement nameProduct = listProduct.get(i).findElement(By.xpath("./descendant::div[@class=\"inventory_item_name \"]"));
+            product.setName(nameProduct.getText());
+            WebElement priceProduct = listProduct.get(i).findElement(By.xpath("./descendant::div[@class=\"inventory_item_price\"]"));
+            String priceNumber = priceProduct.getText().replace("$", "");
+            product.setPrice(Double.parseDouble(priceNumber));
+            WebElement descProduct = listProduct.get(i).findElement(By.xpath("./descendant::div[@class=\"inventory_item_desc\"]"));
+            product.setDesc(descProduct.getText());
+            int quantityProduct = 1;
+            product.setQuantity(quantityProduct);
+            productsAfterSort.add(product);
+        }
+        for (int i = 0; i < productsAfterSort.size(); i++) {
+            Assert.assertTrue(productsAfterSort.get(i).getPrice() == productsBeforeSort.get(i).getPrice(), "The position remains unchanged.");
+            Assert.assertEquals(productsAfterSort.get(i).getName(), productsBeforeSort.get(i).getName(), "The position remains unchanged.");
+            Assert.assertEquals(productsAfterSort.get(i).getDesc(), productsBeforeSort.get(i).getDesc(), "The position remains unchanged.");
+        }
+
+    }
+
 
     @AfterMethod
     public void tearDown() {
