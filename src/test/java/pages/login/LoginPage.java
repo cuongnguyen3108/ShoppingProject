@@ -3,19 +3,20 @@ package pages.login;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import pages.BasePage;
 import vn.shopping.project.utils.ElementValidate;
 import vn.shopping.project.utils.WaitElement;
 
-public class LoginPage {
-    private final WebDriver driver;
+public class LoginPage extends BasePage {
 
-    public LoginPage(WebDriver driver) {
-        this.driver = driver;
-    }
     // Locators
     private final By userNameInput = By.id("user-name");
     private final By passwordInput = By.id("password");
     private final By loginButton = By.id("login-button");
+
+    public LoginPage(WebDriver driver) {
+        super(driver);
+    }
 
     public void enterUsername(String username) {
         WebElement userName = WaitElement.visible(driver, userNameInput, 10);

@@ -2,31 +2,26 @@ package tests.cart;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
-import org.testng.annotations.*;
-import pages.BasePage;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
 import pages.login.LoginPage;
+import tests.BaseTest;
 import vn.shopping.project.models.Product;
 import vn.shopping.project.utils.WaitElement;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class AddToCartMultiCaseTest extends BasePage {
-
+public class AddToCartMultiCaseTest extends BaseTest {
     @BeforeMethod
-    public void setUp() {
-        ChromeOptions options = new ChromeOptions();
-        options.addArguments("--incognito");
-
-        driver = new ChromeDriver(options);
-        driver.manage().window().maximize();
+    @Override
+    protected void setUp() {
+        super.setUp();
         driver.get("https://www.saucedemo.com/");
-
         LoginPage loginPage = new LoginPage(driver);
         String username = "standard_user";
         String password = "secret_sauce";
@@ -312,10 +307,8 @@ public class AddToCartMultiCaseTest extends BasePage {
 
 
     @AfterMethod
-    public void tearDown() {
-        if (driver != null) {
-            driver.quit();
-            driver = null;
-        }
+    @Override
+    protected void tearDown() {
+        super.tearDown();
     }
 }

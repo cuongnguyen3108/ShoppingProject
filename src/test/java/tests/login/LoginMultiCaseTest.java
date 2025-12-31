@@ -1,23 +1,20 @@
 package tests.login;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
-import org.testng.annotations.AfterClass;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.Test;
-import pages.BasePage;
+import org.testng.annotations.*;
+import tests.BaseTest;
 import vn.shopping.project.utils.ElementValidate;
 import vn.shopping.project.utils.WaitElement;
 
-public class LoginMultiCaseTest extends BasePage {
+public class LoginMultiCaseTest extends BaseTest {
 
-    @BeforeClass
-    public void setUp() {
-        driver = new ChromeDriver();
-        driver.manage().window().maximize();
+    @BeforeMethod
+    @Override
+    protected void setUp() {
+        super.setUp();
     }
 
     @Test
@@ -141,11 +138,9 @@ public class LoginMultiCaseTest extends BasePage {
         Assert.assertTrue(errorMsg.getText().contains("Password is required"), "Unexpected error message!");
     }
 
-    @AfterClass
-    public void tearDown() {
-        if (driver != null) {
-            driver.quit();
-        }
+    @AfterMethod
+    @Override
+    protected void tearDown() {
+        super.tearDown();
     }
-
 }
