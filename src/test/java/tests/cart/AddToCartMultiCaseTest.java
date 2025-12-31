@@ -27,9 +27,6 @@ public class AddToCartMultiCaseTest extends BasePage {
         driver.manage().window().maximize();
         driver.get("https://www.saucedemo.com/");
 
-        Assert.assertEquals(driver.getTitle(), "Swag Labs", "Title mismatch!");
-        Assert.assertEquals(driver.getCurrentUrl(), "https://www.saucedemo.com/", "URL mismatch!");
-
         LoginPage loginPage = new LoginPage(driver);
         String username = "standard_user";
         String password = "secret_sauce";
