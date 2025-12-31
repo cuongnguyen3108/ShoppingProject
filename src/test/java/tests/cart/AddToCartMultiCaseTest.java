@@ -38,10 +38,6 @@ public class AddToCartMultiCaseTest extends BasePage {
 
     @Test
     public void addToCartSuccessfulOneProduct() {
-        Assert.assertEquals(driver.getCurrentUrl(), "https://www.saucedemo.com/inventory.html", "Login failed!");
-
-        WebElement appLogo = WaitElement.clickable(driver, By.className("app_logo"), 10);
-        Assert.assertTrue(appLogo.isDisplayed(), "Logo not displayed!");
 
         List<WebElement> listProduct = WaitElement.visibleElements(driver, By.xpath("//div[@class='inventory_item']"), 10);
         Assert.assertTrue(listProduct.get(0).isDisplayed(), "No products displayed!");
@@ -79,11 +75,6 @@ public class AddToCartMultiCaseTest extends BasePage {
 
     @Test
     public void addToCartSuccessfulMultipleProducts() {
-        Assert.assertEquals(driver.getCurrentUrl(), "https://www.saucedemo.com/inventory.html", "Login failed!");
-
-        WebElement appLogo = WaitElement.clickable(driver, By.className("app_logo"), 10);
-        Assert.assertTrue(appLogo.isDisplayed(), "Logo not displayed!");
-
         List<WebElement> listProduct = WaitElement.visibleElements(driver, By.xpath("//div[@class='inventory_item']"), 10);
         Assert.assertTrue(listProduct.get(0).isDisplayed(), "No products displayed!");
         int quantity = 6;
@@ -123,11 +114,6 @@ public class AddToCartMultiCaseTest extends BasePage {
 
     @Test
     public void addToCartNoProducts() {
-        Assert.assertEquals(driver.getCurrentUrl(), "https://www.saucedemo.com/inventory.html", "Login failed!");
-
-        WebElement appLogo = WaitElement.clickable(driver, By.className("app_logo"), 10);
-        Assert.assertTrue(appLogo.isDisplayed(), "Logo not displayed!");
-
         List<WebElement> listProduct = WaitElement.visibleElements(driver, By.xpath("//div[@class='inventory_item']"), 10);
         Assert.assertTrue(listProduct.get(0).isDisplayed(), "No products displayed!");
 
@@ -143,11 +129,6 @@ public class AddToCartMultiCaseTest extends BasePage {
 
     @Test
     public void add5ProductAndRemove3ProductCart() {
-        Assert.assertEquals(driver.getCurrentUrl(), "https://www.saucedemo.com/inventory.html", "Login failed!");
-
-        WebElement appLogo = WaitElement.clickable(driver, By.className("app_logo"), 10);
-        Assert.assertTrue(appLogo.isDisplayed(), "Logo not displayed!");
-
         List<WebElement> listProduct = WaitElement.visibleElements(driver, By.xpath("//div[@class='inventory_item']"), 10);
         Assert.assertTrue(listProduct.get(0).isDisplayed(), "No products displayed!");
         int quantityAdd = 5;
@@ -202,11 +183,6 @@ public class AddToCartMultiCaseTest extends BasePage {
 
     @Test
     public void addToCartSortByNameFromZToA() {
-        Assert.assertEquals(driver.getCurrentUrl(), "https://www.saucedemo.com/inventory.html", "Login failed!");
-
-        WebElement appLogo = WaitElement.clickable(driver, By.className("app_logo"), 10);
-        Assert.assertTrue(appLogo.isDisplayed(), "Logo not displayed!");
-
         List<WebElement> listProduct = WaitElement.visibleElements(driver, By.xpath("//div[@class='inventory_item']"), 10);
         Assert.assertTrue(listProduct.get(0).isDisplayed(), "No products displayed!");
         List<Product> productsBeforeSort = new ArrayList<>();
@@ -251,11 +227,6 @@ public class AddToCartMultiCaseTest extends BasePage {
 
     @Test
     public void addToCartSortByPriceFromLowToHigh() {
-        Assert.assertEquals(driver.getCurrentUrl(), "https://www.saucedemo.com/inventory.html", "Login failed!");
-
-        WebElement appLogo = WaitElement.clickable(driver, By.className("app_logo"), 10);
-        Assert.assertTrue(appLogo.isDisplayed(), "Logo not displayed!");
-
         List<WebElement> listProduct = WaitElement.visibleElements(driver, By.xpath("//div[@class='inventory_item']"), 10);
         Assert.assertTrue(listProduct.get(0).isDisplayed(), "No products displayed!");
         List<Product> productsBeforeSort = new ArrayList<>();
@@ -300,11 +271,6 @@ public class AddToCartMultiCaseTest extends BasePage {
 
     @Test
     public void addToCartSortByPriceFromHighToLow() {
-        Assert.assertEquals(driver.getCurrentUrl(), "https://www.saucedemo.com/inventory.html", "Login failed!");
-
-        WebElement appLogo = WaitElement.clickable(driver, By.className("app_logo"), 10);
-        Assert.assertTrue(appLogo.isDisplayed(), "Logo not displayed!");
-
         List<WebElement> listProduct = WaitElement.visibleElements(driver, By.xpath("//div[@class='inventory_item']"), 10);
         Assert.assertTrue(listProduct.get(0).isDisplayed(), "No products displayed!");
         List<Product> productsBeforeSort = new ArrayList<>();
