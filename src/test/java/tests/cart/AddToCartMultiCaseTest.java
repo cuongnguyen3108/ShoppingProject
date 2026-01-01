@@ -23,9 +23,7 @@ public class AddToCartMultiCaseTest extends BaseTest {
         super.setUp();
         driver.get("https://www.saucedemo.com/");
         LoginPage loginPage = new LoginPage(driver);
-        String username = "standard_user";
-        String password = "secret_sauce";
-        loginPage.login(username, password);
+        loginPage.login("standard_user", "secret_sauce");
     }
 
     @Test
@@ -126,7 +124,7 @@ public class AddToCartMultiCaseTest extends BaseTest {
         int quantityAdd = 5;
         List<Product> products = new ArrayList<>();
 
-        for (int i = 0; i < quantityAdd - 1; i++) {
+        for (int i = 0; i < quantityAdd; i++) {
             Product product = new Product();
             WebElement btnBeforeAddToCartProduct = listProduct.get(i).findElement(By.xpath("./descendant::button"));
             btnBeforeAddToCartProduct.click();
@@ -150,9 +148,9 @@ public class AddToCartMultiCaseTest extends BaseTest {
             products.add(product);
         }
         WebElement totalShoppingCartAdd = WaitElement.visible(driver, By.className("shopping_cart_link"), 10);
-        Assert.assertEquals(totalShoppingCartAdd.getText(), products.size() + "", "❌ The total number off products in the cart is incorrect!");
+        Assert.assertTrue(Integer.parseInt(totalShoppingCartAdd.getText())==products.size(), "❌ The total number off products in the cart is incorrect!");
         int quantityRemove = 3;
-        for (int j = 0; j <= quantityRemove - 1; j++) {
+        for (int j = 0; j < quantityRemove; j++) {
             WebElement btnBeforeAddToCartProduct = listProduct.get(j).findElement(By.xpath("./descendant::button"));
             btnBeforeAddToCartProduct.click();
             WaitElement.waitFor(driver, ExpectedConditions.presenceOfNestedElementLocatedBy(
@@ -169,9 +167,57 @@ public class AddToCartMultiCaseTest extends BaseTest {
         WebElement totalShoppingCartAddAfterRemove = WaitElement.visible(driver, By.className("shopping_cart_link"), 10);
         Assert.assertEquals(totalShoppingCartAddAfterRemove.getText(), products.size() + "", "❌ The total number off products in the cart is incorrect!");
 
-        Assert.assertEquals(totalShoppingCartAddAfterRemove.getText(), products.size() + "", "❌ The total number off products in the cart is incorrect!");
-
     }
+    @Test
+    public void add5ProductAndRemove5ProductCart() {
+        List<WebElement> listProduct = WaitElement.visibleElements(driver, By.xpath("//div[@class='inventory_item']"), 10);
+        Assert.assertTrue(listProduct.get(0).isDisplayed(), "No products displayed!");
+        int quantityAdd = 5;
+        List<Product> products = new ArrayList<>();
+        for (int i = 0; i < quantityAdd ; i++) {
+            Product product = new Product();
+            WebElement btnBeforeAddToCartProduct = listProduct.get(i).findElement(By.xpath("./descendant::button"));
+            btnBeforeAddToCartProduct.click();
+            WaitElement.waitFor(driver, ExpectedConditions.presenceOfNestedElementLocatedBy(
+                    listProduct.get(i),
+                    By.xpath(".//button[text()='Remove']")
+            ), 10);
+            WebElement btnAfterAddToCartProduct =
+                    listProduct.get(i).findElement(By.xpath(".//button[text()='Remove']"));
+            Assert.assertEquals(btnAfterAddToCartProduct.getText().trim(), "Remove", "Unable to add the product.");
+
+            WebElement nameProduct = listProduct.get(i).findElement(By.xpath("./descendant::div[@class=\"inventory_item_name \"]"));
+            product.setName(nameProduct.getText());
+            WebElement priceProduct = listProduct.get(i).findElement(By.xpath("./descendant::div[@class=\"inventory_item_price\"]"));
+            String priceNumber = priceProduct.getText().replace("$", "");
+            product.setPrice(Double.parseDouble(priceNumber));
+            WebElement descProduct = listProduct.get(i).findElement(By.xpath("./descendant::div[@class=\"inventory_item_desc\"]"));
+            product.setDesc(descProduct.getText());
+            int quantityProduct = 1;
+            product.setQuantity(quantityProduct);
+            products.add(product);
+        }
+        WebElement totalShoppingCartAdd = WaitElement.visible(driver, By.className("shopping_cart_link"), 10);
+        Assert.assertTrue(Integer.parseInt(totalShoppingCartAdd.getText())==products.size(), "❌ The total number off products in the cart is incorrect!");
+        int quantityRemove = 5;
+        for (int j = 0; j < quantityRemove ; j++) {
+            WebElement btnBeforeAddToCartProduct = listProduct.get(j).findElement(By.xpath("./descendant::button"));
+            btnBeforeAddToCartProduct.click();
+            WaitElement.waitFor(driver, ExpectedConditions.presenceOfNestedElementLocatedBy(
+                    listProduct.get(j),
+                    By.xpath(".//button[text()='Add to cart']")
+            ), 10);
+            WebElement btnAfterAddToCartProduct =
+                    listProduct.get(j).findElement(By.xpath(".//button[text()='Add to cart']"));
+            WebElement nameProduct = listProduct.get(j).findElement(By.xpath("./descendant::div[@class=\"inventory_item_name \"]"));
+
+            Assert.assertEquals(btnAfterAddToCartProduct.getText(), "Add to cart", "Unable to remove the product.");
+            products.removeIf(p -> p.getName().equals(nameProduct.getText()));
+        }
+        WebElement totalShoppingCartAddAfterRemove = WaitElement.visible(driver, By.className("shopping_cart_link"), 10);
+        Assert.assertEquals(totalShoppingCartAddAfterRemove.getText(),  "", "❌ The total number off products in the cart is incorrect!");
+    }
+
 
     @Test
     public void addToCartSortByNameFromZToA() {

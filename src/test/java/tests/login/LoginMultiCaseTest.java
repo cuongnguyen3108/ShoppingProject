@@ -2,7 +2,6 @@ package tests.login;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
 import org.testng.annotations.*;
 import tests.BaseTest;
@@ -28,19 +27,17 @@ public class LoginMultiCaseTest extends BaseTest {
         // Điền thông tin đúng
         WebElement userName = WaitElement.visible(driver, By.id("user-name"), 10);
         ElementValidate.clearAndType(userName, "standard_user");
-        Assert.assertEquals(userName.getAttribute("value").trim(), "standard_user", "Incorrect user name entered");
+        Assert.assertEquals(userName.getAttribute("value"), "standard_user", "Incorrect user name entered");
 
         WebElement password = WaitElement.visible(driver, By.id("password"), 10);
         ElementValidate.clearAndType(password, "secret_sauce");
-        Assert.assertEquals(password.getAttribute("value").trim(), "secret_sauce", "Incorrect password entered");
+        Assert.assertEquals(password.getAttribute("value"), "secret_sauce", "Incorrect password entered");
 
         WebElement buttonLogin = WaitElement.clickable(driver, By.id("login-button"), 10);
         Assert.assertTrue(buttonLogin.isDisplayed(), "The login button is not displayed.");
         buttonLogin.click();
-        // Xác nhận vào trang inventory
         Assert.assertEquals(driver.getCurrentUrl(), "https://www.saucedemo.com/inventory.html", "Login failed!");
 
-        // Kiểm tra logo & sản phẩm
         WebElement appLogo = WaitElement.clickable(driver, By.className("app_logo"), 10);
         Assert.assertTrue(appLogo.isDisplayed(), "Logo not displayed!");
 
@@ -57,16 +54,16 @@ public class LoginMultiCaseTest extends BaseTest {
 
         WebElement userName = WaitElement.visible(driver, By.id("user-name"), 10);
         ElementValidate.clearAndType(userName, "invalid_user");
-        Assert.assertEquals(userName.getAttribute("value").trim(), "invalid_user", "Incorrect user name entered");
+        Assert.assertEquals(userName.getAttribute("value"), "invalid_user", "Incorrect user name entered");
 
         WebElement password = WaitElement.visible(driver, By.id("password"), 10);
         ElementValidate.clearAndType(password, "secret_sauce");
-        Assert.assertEquals(password.getAttribute("value").trim(), "secret_sauce", "Incorrect password entered");
+        Assert.assertEquals(password.getAttribute("value"), "secret_sauce", "Incorrect password entered");
 
         WebElement buttonLogin = WaitElement.clickable(driver, By.id("login-button"), 10);
         Assert.assertTrue(buttonLogin.isDisplayed(), "The login button is not displayed.");
         buttonLogin.click();
-        // Kiểm tra thông báo lỗi
+
         WebElement errorMsg = WaitElement.visible(driver, By.cssSelector("[data-test='error']"), 10);
         Assert.assertTrue(errorMsg.isDisplayed(), "Error message not displayed!");
         Assert.assertTrue(errorMsg.getText().contains("Username and password do not match"), "Unexpected error message!");
@@ -99,11 +96,10 @@ public class LoginMultiCaseTest extends BaseTest {
         WaitElement.visible(driver, By.id("password"), 10).sendKeys("secret_sauce");
         WebElement userName = WaitElement.visible(driver, By.id("user-name"), 10);
         ElementValidate.clearAndType(userName, "");
-//        Assert.assertEquals(userName.getAttribute("value").trim(), "", "Incorrect user name entered");
 
         WebElement password = WaitElement.visible(driver, By.id("password"), 10);
         ElementValidate.clearAndType(password, "secret_sauce");
-        Assert.assertEquals(password.getAttribute("value").trim(), "secret_sauce", "Incorrect password entered");
+        Assert.assertEquals(password.getAttribute("value"), "secret_sauce", "Incorrect password entered");
 
         WebElement buttonLogin = WaitElement.clickable(driver, By.id("login-button"), 10);
         Assert.assertTrue(buttonLogin.isDisplayed(), "The login button is not displayed.");
@@ -123,11 +119,11 @@ public class LoginMultiCaseTest extends BaseTest {
 
         WebElement userName = WaitElement.visible(driver, By.id("user-name"), 10);
         ElementValidate.clearAndType(userName, "invalid_user");
-        Assert.assertEquals(userName.getAttribute("value").trim(), "invalid_user", "Incorrect user name entered");
+        Assert.assertEquals(userName.getAttribute("value"), "invalid_user", "Incorrect user name entered");
 
         WebElement password = WaitElement.visible(driver, By.id("password"), 10);
         ElementValidate.clearAndType(password, "");
-        Assert.assertEquals(password.getAttribute("value").trim(), "", "Incorrect password entered");
+        Assert.assertEquals(password.getAttribute("value"), "", "Incorrect password entered");
 
         WebElement buttonLogin = WaitElement.clickable(driver, By.id("login-button"), 10);
         Assert.assertTrue(buttonLogin.isDisplayed(), "The login button is not displayed.");
