@@ -42,6 +42,8 @@ public class YourCartMultiCaseTest extends BaseTest {
             WebElement quantityProduct = listElementProduct.get(i).findElement(By.xpath("./descendant::div[@class=\"cart_quantity\"]"));
             Assert.assertEquals("" + products.get(i).getQuantity(), quantityProduct.getText(), "Product quantity number " + (i + 1) + " is incorrect.");
         }
+        WebElement totalShoppingCart = WaitElement.visible(driver, By.className("shopping_cart_link"), 10);
+        Assert.assertEquals(totalShoppingCart.getText(), products.size() + "", "❌ The total number off products in the cart is incorrect!");
     }
 
     @Test
