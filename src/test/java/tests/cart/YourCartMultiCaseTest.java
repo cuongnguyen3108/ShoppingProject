@@ -22,12 +22,12 @@ public class YourCartMultiCaseTest extends BaseTest {
         LoginPage loginPage = new LoginPage(driver);
         loginPage.login("standard_user", "secret_sauce");
         AddToCartPage addToCartPage = new AddToCartPage(driver);
-        products = addToCartPage.addToCart(2);
+        products = addToCartPage.addToCart(4);
         addToCartPage.onclickYourCar();
     }
 
     @Test
-    public void validShoppingCartInformation() {
+    public void testValidShoppingCartInformation() {
         List<WebElement> listElementProduct = WaitElement.visibleElements(driver, By.xpath("//div[@class=\"cart_item\"]"), 10);
         Assert.assertEquals(products.size(), listElementProduct.size(), "incorrect quantity");
         for (int i = 0; i < products.size(); i++) {
@@ -47,11 +47,11 @@ public class YourCartMultiCaseTest extends BaseTest {
     }
 
     @Test
-    public void removeAllProductFromShoppingCart() {
-        for (int i = 0; i < 2; i++) {
+    public void testRemoveAllProductFromShoppingCart() {
+        int size=products.size();
+        for (int i = 0; i < size; i++) {
             List<WebElement> listElementProductBeforeRemove = WaitElement.visibleElements(driver, By.xpath("//div[@class=\"cart_item\"]"), 10);
             Assert.assertTrue(products.size() == listElementProductBeforeRemove.size(), "incorrect quantity");
-
             WebElement nameProduct = listElementProductBeforeRemove.get(0).findElement(By.xpath("./descendant::div[@class=\"inventory_item_name\"]"));
             WebElement btnRemove = listElementProductBeforeRemove.get(0).findElement(By.xpath("./descendant::button"));
             products.removeIf(product -> product.getName().equals(nameProduct.getText()));
@@ -64,7 +64,7 @@ public class YourCartMultiCaseTest extends BaseTest {
     }
 
     @Test
-    public void removeProductFromShoppingCart() {
+    public void testRemoveProductFromShoppingCart() {
         List<WebElement> listElementProductBeforeRemove = WaitElement.visibleElements(driver, By.xpath("//div[@class=\"cart_item\"]"), 10);
         Assert.assertTrue(products.size() == listElementProductBeforeRemove.size(), "incorrect quantity");
 
@@ -92,7 +92,7 @@ public class YourCartMultiCaseTest extends BaseTest {
     }
 
     @Test
-    public void clickButtonCheckout() {
+    public void testClickButtonCheckout() {
         WebElement btnCheckout = WaitElement.clickable(driver, By.id("checkout"), 15);
         Assert.assertTrue(btnCheckout.isDisplayed(), "button checkout not displayed");
         btnCheckout.click();
@@ -102,7 +102,7 @@ public class YourCartMultiCaseTest extends BaseTest {
     }
 
     @Test
-    public void clickButtonContinueShopping() {
+    public void testClickButtonContinueShopping() {
         WebElement btnContinueShopping = WaitElement.clickable(driver, By.id("continue-shopping"), 15);
         Assert.assertTrue(btnContinueShopping.isDisplayed(), "button continue shopping not displayed");
 

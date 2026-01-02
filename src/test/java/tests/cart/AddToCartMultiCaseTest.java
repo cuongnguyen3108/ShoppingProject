@@ -27,7 +27,7 @@ public class AddToCartMultiCaseTest extends BaseTest {
     }
 
     @Test
-    public void addToCartSuccessfulOneProduct() {
+    public void testAddToCartSuccessfulOneProduct() {
 
         List<WebElement> listProduct = WaitElement.visibleElements(driver, By.xpath("//div[@class='inventory_item']"), 10);
         Assert.assertTrue(listProduct.get(0).isDisplayed(), "No products displayed!");
@@ -64,7 +64,7 @@ public class AddToCartMultiCaseTest extends BaseTest {
     }
 
     @Test
-    public void addToCartSuccessfulMultipleProducts() {
+    public void testAddToCartSuccessfulMultipleProducts() {
         List<WebElement> listProduct = WaitElement.visibleElements(driver, By.xpath("//div[@class='inventory_item']"), 10);
         Assert.assertTrue(listProduct.get(0).isDisplayed(), "No products displayed!");
         int quantity = 6;
@@ -103,7 +103,7 @@ public class AddToCartMultiCaseTest extends BaseTest {
     }
 
     @Test
-    public void addToCartNoProducts() {
+    public void testAddToCartNoProducts() {
         List<WebElement> listProduct = WaitElement.visibleElements(driver, By.xpath("//div[@class='inventory_item']"), 10);
         Assert.assertTrue(listProduct.get(0).isDisplayed(), "No products displayed!");
 
@@ -118,7 +118,7 @@ public class AddToCartMultiCaseTest extends BaseTest {
     }
 
     @Test
-    public void add5ProductAndRemove3ProductCart() {
+    public void testAdd5ProductAndRemove3ProductCart() {
         List<WebElement> listProduct = WaitElement.visibleElements(driver, By.xpath("//div[@class='inventory_item']"), 10);
         Assert.assertTrue(listProduct.get(0).isDisplayed(), "No products displayed!");
         int quantityAdd = 5;
@@ -169,7 +169,7 @@ public class AddToCartMultiCaseTest extends BaseTest {
 
     }
     @Test
-    public void add5ProductAndRemove5ProductCart() {
+    public void testAdd5ProductAndRemove5ProductCart() {
         List<WebElement> listProduct = WaitElement.visibleElements(driver, By.xpath("//div[@class='inventory_item']"), 10);
         Assert.assertTrue(listProduct.get(0).isDisplayed(), "No products displayed!");
         int quantityAdd = 5;
@@ -220,7 +220,7 @@ public class AddToCartMultiCaseTest extends BaseTest {
 
 
     @Test
-    public void addToCartSortByNameFromZToA() {
+    public void testAddToCartSortByNameFromZToA() {
         List<WebElement> listProduct = WaitElement.visibleElements(driver, By.xpath("//div[@class='inventory_item']"), 10);
         Assert.assertTrue(listProduct.get(0).isDisplayed(), "No products displayed!");
         List<Product> productsBeforeSort = new ArrayList<>();
@@ -264,7 +264,7 @@ public class AddToCartMultiCaseTest extends BaseTest {
     }
 
     @Test
-    public void addToCartSortByPriceFromLowToHigh() {
+    public void testAddToCartSortByPriceFromLowToHigh() {
         List<WebElement> listProduct = WaitElement.visibleElements(driver, By.xpath("//div[@class='inventory_item']"), 10);
         Assert.assertTrue(listProduct.get(0).isDisplayed(), "No products displayed!");
         List<Product> productsBeforeSort = new ArrayList<>();
@@ -308,7 +308,7 @@ public class AddToCartMultiCaseTest extends BaseTest {
     }
 
     @Test
-    public void addToCartSortByPriceFromHighToLow() {
+    public void testAddToCartSortByPriceFromHighToLow() {
         List<WebElement> listProduct = WaitElement.visibleElements(driver, By.xpath("//div[@class='inventory_item']"), 10);
         Assert.assertTrue(listProduct.get(0).isDisplayed(), "No products displayed!");
         List<Product> productsBeforeSort = new ArrayList<>();

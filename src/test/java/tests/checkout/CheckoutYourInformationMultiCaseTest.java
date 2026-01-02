@@ -92,7 +92,7 @@ public class CheckoutYourInformationMultiCaseTest extends BaseTest {
     }
 
     @Test
-    public void clickButtonCancel(){
+    public void testClickButtonCancel(){
         WebElement btnCancel = WaitElement.clickable(driver, By.id("cancel"), 10);
         Assert.assertTrue(btnCancel.isDisplayed(),"The button cancel is not displayed.");
         btnCancel.click();
@@ -100,6 +100,7 @@ public class CheckoutYourInformationMultiCaseTest extends BaseTest {
         WebElement title = WaitElement.visible(driver, By.xpath("//span[@class=\"title\"]"), 10);
         Assert.assertEquals(title.getText(), "Your Cart", "Unable to switch pages.");
     }
+
     @AfterMethod
     @Override
     protected void tearDown() {
