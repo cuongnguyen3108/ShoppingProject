@@ -8,12 +8,12 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import pages.cart.AddToCartPage;
 import pages.login.LoginPage;
-import tests.BaseTest;
+import tests.Base;
 import vn.shopping.project.utils.WaitElement;
 
 import java.util.List;
 
-public class YourCartMultiCaseTest extends BaseTest {
+public class YourCartTest extends Base {
     @BeforeMethod
     @Override
     protected void setUp() {

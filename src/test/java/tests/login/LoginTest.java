@@ -4,22 +4,21 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.*;
-import tests.BaseTest;
+import tests.Base;
 import vn.shopping.project.utils.ElementValidate;
 import vn.shopping.project.utils.WaitElement;
 
-public class LoginMultiCaseTest extends BaseTest {
+public class LoginTest extends Base {
 
     @BeforeMethod
     @Override
     protected void setUp() {
         super.setUp();
+        driver.get("https://www.saucedemo.com/");
     }
 
     @Test
     public void testLoginWithValidCredentials() {
-        driver.get("https://www.saucedemo.com/");
-
         // Kiểm tra tiêu đề và URL
         Assert.assertEquals(driver.getTitle(), "Swag Labs", "Title mismatch!");
         Assert.assertEquals(driver.getCurrentUrl(), "https://www.saucedemo.com/", "URL mismatch!");
@@ -47,8 +46,6 @@ public class LoginMultiCaseTest extends BaseTest {
 
     @Test
     public void testLoginWithInvalidUsername() {
-        driver.get("https://www.saucedemo.com/");
-
         Assert.assertEquals(driver.getTitle(), "Swag Labs", "Title mismatch!");
         Assert.assertEquals(driver.getCurrentUrl(), "https://www.saucedemo.com/", "URL mismatch!");
 
@@ -71,8 +68,6 @@ public class LoginMultiCaseTest extends BaseTest {
 
     @Test
     public void testLoginWithInvalidPassword() {
-        driver.get("https://www.saucedemo.com/");
-
         Assert.assertEquals(driver.getTitle(), "Swag Labs", "Title mismatch!");
         Assert.assertEquals(driver.getCurrentUrl(), "https://www.saucedemo.com/", "URL mismatch!");
 
@@ -87,8 +82,6 @@ public class LoginMultiCaseTest extends BaseTest {
 
     @Test
     public void testLoginWithEmptyUsername() {
-        driver.get("https://www.saucedemo.com/");
-
         Assert.assertEquals(driver.getTitle(), "Swag Labs", "Title mismatch!");
         Assert.assertEquals(driver.getCurrentUrl(), "https://www.saucedemo.com/", "URL mismatch!");
 
@@ -112,8 +105,6 @@ public class LoginMultiCaseTest extends BaseTest {
 
     @Test
     public void testLoginWithEmptyPassword() {
-        driver.get("https://www.saucedemo.com/");
-
         Assert.assertEquals(driver.getTitle(), "Swag Labs", "Title mismatch!");
         Assert.assertEquals(driver.getCurrentUrl(), "https://www.saucedemo.com/", "URL mismatch!");
 

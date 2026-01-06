@@ -10,13 +10,13 @@ import pages.cart.AddToCartPage;
 import pages.cart.YourCartPage;
 import pages.checkout.CheckoutYourInformationPage;
 import pages.login.LoginPage;
-import tests.BaseTest;
+import tests.Base;
 import vn.shopping.project.models.Product;
 import vn.shopping.project.utils.WaitElement;
 
 import java.util.List;
 
-public class CheckoutOverviewMultiCaseTest extends BaseTest {
+public class CheckoutOverviewTest extends Base {
     @BeforeMethod
     @Override
     protected void setUp() {

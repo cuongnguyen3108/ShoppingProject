@@ -9,11 +9,11 @@ import org.testng.annotations.Test;
 import pages.cart.AddToCartPage;
 import pages.cart.YourCartPage;
 import pages.login.LoginPage;
-import tests.BaseTest;
+import tests.Base;
 import vn.shopping.project.utils.ElementValidate;
 import vn.shopping.project.utils.WaitElement;
 
-public class CheckoutYourInformationMultiCaseTest extends BaseTest {
+public class CheckoutYourInformationTest extends Base {
     @BeforeMethod
     @Override
     protected void setUp() {

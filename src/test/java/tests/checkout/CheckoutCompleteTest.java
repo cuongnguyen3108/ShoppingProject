@@ -11,10 +11,10 @@ import pages.cart.YourCartPage;
 import pages.checkout.CheckoutOverviewPage;
 import pages.checkout.CheckoutYourInformationPage;
 import pages.login.LoginPage;
-import tests.BaseTest;
+import tests.Base;
 import vn.shopping.project.utils.WaitElement;
 
-public class CheckoutCompleteMultiCaseTest extends BaseTest {
+public class CheckoutCompleteTest extends Base {
     @BeforeMethod
     @Override
     protected void setUp() {
