@@ -9,7 +9,7 @@ import vn.shopping.project.models.Product;
 
 import java.util.List;
 
-public class BaseTest {
+public class Base {
     protected WebDriver driver;
     protected List<Product> products;
 
