@@ -9,8 +9,8 @@ import org.testng.annotations.Test;
 import pages.cart.AddToCartPage;
 import pages.cart.YourCartPage;
 import pages.checkout.CheckoutYourInformationPage;
-import pages.login.LoginPage;
 import tests.Base;
+import tests.login.action.LoginPage;
 import vn.shopping.project.models.Product;
 import vn.shopping.project.utils.WaitElement;
 

@@ -7,8 +7,8 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import pages.cart.AddToCartPage;
-import pages.login.LoginPage;
 import tests.Base;
+import tests.login.action.LoginPage;
 import vn.shopping.project.utils.WaitElement;
 
 import java.util.List;
