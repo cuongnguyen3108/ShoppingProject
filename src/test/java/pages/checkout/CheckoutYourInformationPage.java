@@ -4,6 +4,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import pages.BasePage;
+import vn.shopping.project.utils.ElementActions;
 import vn.shopping.project.utils.ElementValidate;
 import vn.shopping.project.utils.WaitElement;
 
@@ -20,17 +21,17 @@ public class CheckoutYourInformationPage extends BasePage {
 
     private void enterFirstName(String firstName) {
         WebElement inputFirstName = WaitElement.visible(driver, firstNameInput, 10);
-        ElementValidate.clearAndType(inputFirstName, firstName);
+          ElementActions.clearAndType(inputFirstName, firstName);
     }
 
     private void enterLastName(String lastName) {
         WebElement inputLastName = WaitElement.visible(driver, lastNameInput, 10);
-        ElementValidate.clearAndType(inputLastName, lastName);
+          ElementActions.clearAndType(inputLastName, lastName);
     }
 
     private void enterPostalCode(String postalCode) {
         WebElement inputPostalCode = WaitElement.visible(driver, postalCodeInput, 10);
-        ElementValidate.clearAndType(inputPostalCode, postalCode);
+          ElementActions.clearAndType(inputPostalCode, postalCode);
     }
 
     private void clickContinueBTN() {

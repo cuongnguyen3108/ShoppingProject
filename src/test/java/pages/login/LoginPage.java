@@ -4,6 +4,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import pages.BasePage;
+import vn.shopping.project.utils.ElementActions;
 import vn.shopping.project.utils.ElementValidate;
 import vn.shopping.project.utils.WaitElement;
 
@@ -20,12 +21,12 @@ public class LoginPage extends BasePage {
 
     public void enterUsername(String username) {
         WebElement userName = WaitElement.visible(driver, userNameInput, 10);
-        ElementValidate.clearAndType(userName, username);
+          ElementActions.clearAndType(userName, username);
     }
 
     public void enterPassword(String password) {
         WebElement passwordEl = WaitElement.visible(driver, passwordInput, 10);
-        ElementValidate.clearAndType(passwordEl, password);
+          ElementActions.clearAndType(passwordEl, password);
     }
 
     public void clickLogin() {

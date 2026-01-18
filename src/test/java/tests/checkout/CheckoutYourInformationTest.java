@@ -10,6 +10,7 @@ import pages.cart.AddToCartPage;
 import pages.cart.YourCartPage;
 import pages.login.LoginPage;
 import tests.Base;
+import vn.shopping.project.utils.ElementActions;
 import vn.shopping.project.utils.ElementValidate;
 import vn.shopping.project.utils.WaitElement;
 
@@ -31,11 +32,11 @@ public class CheckoutYourInformationTest extends Base {
     @Test
     public void testYourInformationWithValidCredentials() {
         WebElement inputFirstName = WaitElement.visible(driver, By.id("first-name"), 10);
-        ElementValidate.clearAndType(inputFirstName, "cuong");
+          ElementActions.clearAndType(inputFirstName, "cuong");
         WebElement inputLastName = WaitElement.visible(driver, By.id("last-name"), 10);
-        ElementValidate.clearAndType(inputLastName, "nguyen");
+          ElementActions.clearAndType(inputLastName, "nguyen");
         WebElement inputPostalCode = WaitElement.visible(driver, By.id("postal-code"), 10);
-        ElementValidate.clearAndType(inputPostalCode, "0987654321");
+          ElementActions.clearAndType(inputPostalCode, "0987654321");
         WebElement btnContinue = WaitElement.clickable(driver, By.id("continue"), 10);
         Assert.assertTrue(btnContinue.isDisplayed(),"The button continue is not displayed.");
         btnContinue.click();
@@ -47,11 +48,11 @@ public class CheckoutYourInformationTest extends Base {
     @Test
     public void testYourInformationWithInvalidLastName() {
         WebElement inputFirstName = WaitElement.visible(driver, By.id("first-name"), 10);
-        ElementValidate.clearAndType(inputFirstName, "cuong");
+          ElementActions.clearAndType(inputFirstName, "cuong");
         WebElement inputLastName = WaitElement.visible(driver, By.id("last-name"), 10);
-        ElementValidate.clearAndType(inputLastName, "");
+          ElementActions.clearAndType(inputLastName, "");
         WebElement inputPostalCode = WaitElement.visible(driver, By.id("postal-code"), 10);
-        ElementValidate.clearAndType(inputPostalCode, "0987654321");
+          ElementActions.clearAndType(inputPostalCode, "0987654321");
         WebElement btnContinue = WaitElement.clickable(driver, By.id("continue"), 10);
         Assert.assertTrue(btnContinue.isDisplayed(),"The button continue is not displayed.");
         btnContinue.click();
@@ -63,11 +64,11 @@ public class CheckoutYourInformationTest extends Base {
     @Test
     public void testYourInformationWithInvalidFirstName() {
         WebElement inputFirstName = WaitElement.visible(driver, By.id("first-name"), 10);
-        ElementValidate.clearAndType(inputFirstName, "");
+          ElementActions.clearAndType(inputFirstName, "");
         WebElement inputLastName = WaitElement.visible(driver, By.id("last-name"), 10);
-        ElementValidate.clearAndType(inputLastName, "nguyen");
+          ElementActions.clearAndType(inputLastName, "nguyen");
         WebElement inputPostalCode = WaitElement.visible(driver, By.id("postal-code"), 10);
-        ElementValidate.clearAndType(inputPostalCode, "0987654321");
+          ElementActions.clearAndType(inputPostalCode, "0987654321");
         WebElement btnContinue = WaitElement.clickable(driver, By.id("continue"), 10);
         Assert.assertTrue(btnContinue.isDisplayed(),"The button continue is not displayed.");
         btnContinue.click();
@@ -78,11 +79,11 @@ public class CheckoutYourInformationTest extends Base {
     @Test
     public void testYourInformationWithInvalidPostalCode() {
         WebElement inputFirstName = WaitElement.visible(driver, By.id("first-name"), 10);
-        ElementValidate.clearAndType(inputFirstName, "cuong");
+          ElementActions.clearAndType(inputFirstName, "cuong");
         WebElement inputLastName = WaitElement.visible(driver, By.id("last-name"), 10);
-        ElementValidate.clearAndType(inputLastName, "nguyen");
+          ElementActions.clearAndType(inputLastName, "nguyen");
         WebElement inputPostalCode = WaitElement.visible(driver, By.id("postal-code"), 10);
-        ElementValidate.clearAndType(inputPostalCode, "");
+          ElementActions.clearAndType(inputPostalCode, "");
         WebElement btnContinue = WaitElement.clickable(driver, By.id("continue"), 10);
         Assert.assertTrue(btnContinue.isDisplayed(),"The button continue is not displayed.");
         btnContinue.click();
