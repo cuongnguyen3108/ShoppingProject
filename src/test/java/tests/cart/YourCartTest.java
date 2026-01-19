@@ -51,7 +51,7 @@ public class YourCartTest extends Base {
         int size=products.size();
         for (int i = 0; i < size; i++) {
             List<WebElement> listElementProductBeforeRemove = WaitElement.visibleElements(driver, By.xpath("//div[@class=\"cart_item\"]"), 10);
-            Assert.assertTrue(products.size() == listElementProductBeforeRemove.size(), "incorrect quantity");
+            Assert.assertEquals(listElementProductBeforeRemove.size(), products.size(), "incorrect quantity");
             WebElement nameProduct = listElementProductBeforeRemove.get(0).findElement(By.xpath("./descendant::div[@class=\"inventory_item_name\"]"));
             WebElement btnRemove = listElementProductBeforeRemove.get(0).findElement(By.xpath("./descendant::button"));
             products.removeIf(product -> product.getName().equals(nameProduct.getText()));
@@ -66,7 +66,7 @@ public class YourCartTest extends Base {
     @Test
     public void testRemoveProductFromShoppingCart() {
         List<WebElement> listElementProductBeforeRemove = WaitElement.visibleElements(driver, By.xpath("//div[@class=\"cart_item\"]"), 10);
-        Assert.assertTrue(products.size() == listElementProductBeforeRemove.size(), "incorrect quantity");
+        Assert.assertEquals(listElementProductBeforeRemove.size(), products.size(), "incorrect quantity");
 
         WebElement nameProduct = listElementProductBeforeRemove.get(0).findElement(By.xpath("./descendant::div[@class=\"inventory_item_name\"]"));
         WebElement btnRemove = listElementProductBeforeRemove.get(0).findElement(By.xpath("./descendant::button"));
@@ -76,7 +76,7 @@ public class YourCartTest extends Base {
         List<WebElement> listElementProductAfterRemove = WaitElement.visibleElements(driver, By.xpath("//div[@class=\"cart_item\"]"), 10);
         Assert.assertTrue(listElementProductAfterRemove.get(0).isDisplayed(), "incorrect quantity");
         WebElement totalShoppingCar = WaitElement.visible(driver, By.className("shopping_cart_link"), 10);
-        Assert.assertTrue(Integer.parseInt(totalShoppingCar.getText()) == products.size(), "❌ The total number off products in the cart is incorrect!");
+        Assert.assertEquals(products.size(), Integer.parseInt(totalShoppingCar.getText()), "❌ The total number off products in the cart is incorrect!");
         for (int i = 0; i < products.size(); i++) {
             WebElement nameProductAfterRemove = listElementProductAfterRemove.get(i).findElement(By.xpath("./descendant::div[@class=\"inventory_item_name\"]"));
             Assert.assertEquals(products.get(i).getName(), nameProductAfterRemove.getText(), "Product name number " + (i + 1) + " is incorrect.");

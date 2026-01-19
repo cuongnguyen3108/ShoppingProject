@@ -11,7 +11,6 @@ import pages.cart.YourCartPage;
 import tests.Base;
 import tests.login.action.LoginPage;
 import vn.shopping.project.utils.ElementActions;
-import vn.shopping.project.utils.ElementValidate;
 import vn.shopping.project.utils.WaitElement;
 
 public class CheckoutYourInformationTest extends Base {
