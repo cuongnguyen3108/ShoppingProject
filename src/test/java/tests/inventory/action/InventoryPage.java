@@ -43,6 +43,10 @@ public class InventoryPage {
         return products;
     }
 
+    public void onclickYourCar() {
+        WaitElement.visible(driver, InventoryPageUI.TOTAL_SHOPPING_CART, 10).click();
+    }
+
     public void removeProductAddedToCart(List<Product> products, int quantity) {
         List<WebElement> listProduct = WaitElement.visibleElements(driver, LoginPageUI.INVENTORY_ITEM, 10);
         for (int j = 0; j < quantity; j++) {

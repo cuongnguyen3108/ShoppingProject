@@ -34,7 +34,7 @@ public class InventoryTest extends Base {
 
         WebElement totalShoppingCart = WaitElement.visible(driver, InventoryPageUI.TOTAL_SHOPPING_CART, 10);
         Assert.assertEquals(totalShoppingCart.getText(), products.size() + "", "❌ The total number off products in the cart is incorrect!");
-        totalShoppingCart.click();
+        inventoryPage.onclickYourCar();
 
         Assert.assertEquals(driver.getCurrentUrl(), "https://www.saucedemo.com/cart.html", "Unable to switch pages.");
         WebElement title = WaitElement.visible(driver, InventoryPageUI.CART_TITLE, 10);
@@ -47,7 +47,7 @@ public class InventoryTest extends Base {
 
         WebElement totalShoppingCart = WaitElement.visible(driver, InventoryPageUI.TOTAL_SHOPPING_CART, 10);
         Assert.assertEquals(totalShoppingCart.getText(), products.size() + "", "❌ The total number off products in the cart is incorrect!");
-        totalShoppingCart.click();
+        inventoryPage.onclickYourCar();
 
         Assert.assertEquals(driver.getCurrentUrl(), "https://www.saucedemo.com/cart.html", "Unable to switch pages.");
         WebElement title = WaitElement.visible(driver, InventoryPageUI.CART_TITLE, 10);
@@ -60,7 +60,7 @@ public class InventoryTest extends Base {
 
         WebElement totalShoppingCart = WaitElement.visible(driver, InventoryPageUI.TOTAL_SHOPPING_CART, 10);
         Assert.assertEquals(totalShoppingCart.getText(), "", "❌ The total number off products in the cart is incorrect!");
-        totalShoppingCart.click();
+        inventoryPage.onclickYourCar();
 
         Assert.assertEquals(driver.getCurrentUrl(), "https://www.saucedemo.com/cart.html", "Unable to switch pages.");
         WebElement title = WaitElement.visible(driver, InventoryPageUI.CART_TITLE, 10);
