@@ -5,7 +5,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import pages.BasePage;
 import vn.shopping.project.utils.ElementActions;
-import vn.shopping.project.utils.ElementValidate;
 import vn.shopping.project.utils.WaitElement;
 
 public class CheckoutYourInformationPage extends BasePage {
