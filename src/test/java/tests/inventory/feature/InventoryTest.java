@@ -12,6 +12,7 @@ import tests.login.action.LoginPage;
 import vn.shopping.project.enums.SortCondition;
 import vn.shopping.project.models.Product;
 import vn.shopping.project.utils.WaitElement;
+import vn.shopping.project.utils.validation.Validator;
 
 import java.util.List;
 
@@ -33,12 +34,12 @@ public class InventoryTest extends Base {
         products = inventoryPage.addToCart(1);
 
         WebElement totalShoppingCart = WaitElement.visible(driver, InventoryPageUI.TOTAL_SHOPPING_CART, 10);
-        Assert.assertEquals(totalShoppingCart.getText(), products.size() + "", "❌ The total number off products in the cart is incorrect!");
+        Assert.assertTrue(Validator.isTextEqual(totalShoppingCart.getText(), products.size() + ""), "❌ The total number off products in the cart is incorrect!");
         inventoryPage.onclickYourCar();
 
-        Assert.assertEquals(driver.getCurrentUrl(), "https://www.saucedemo.com/cart.html", "Unable to switch pages.");
+        Assert.assertTrue(Validator.isTextEqual(driver.getCurrentUrl(), "https://www.saucedemo.com/cart.html"), "Unable to switch pages.");
         WebElement title = WaitElement.visible(driver, InventoryPageUI.CART_TITLE, 10);
-        Assert.assertEquals(title.getText(), "Your Cart", "Unable to switch pages.");
+        Assert.assertTrue(Validator.isTextEqual(title.getText(), "Your Cart"), "Unable to switch pages.");
     }
 
     @Test
@@ -46,12 +47,12 @@ public class InventoryTest extends Base {
         products = inventoryPage.addToCart(1);
 
         WebElement totalShoppingCart = WaitElement.visible(driver, InventoryPageUI.TOTAL_SHOPPING_CART, 10);
-        Assert.assertEquals(totalShoppingCart.getText(), products.size() + "", "❌ The total number off products in the cart is incorrect!");
+        Assert.assertTrue(Validator.isTextEqual(totalShoppingCart.getText(), products.size() + ""), "❌ The total number off products in the cart is incorrect!");
         inventoryPage.onclickYourCar();
 
-        Assert.assertEquals(driver.getCurrentUrl(), "https://www.saucedemo.com/cart.html", "Unable to switch pages.");
+        Assert.assertTrue(Validator.isTextEqual(driver.getCurrentUrl(), "https://www.saucedemo.com/cart.html"), "Unable to switch pages.");
         WebElement title = WaitElement.visible(driver, InventoryPageUI.CART_TITLE, 10);
-        Assert.assertEquals(title.getText(), "Your Cart", "Unable to switch pages.");
+        Assert.assertTrue(Validator.isTextEqual(title.getText(), "Your Cart"), "Unable to switch pages.");
     }
 
     @Test
@@ -59,12 +60,12 @@ public class InventoryTest extends Base {
         products = inventoryPage.addToCart(0);
 
         WebElement totalShoppingCart = WaitElement.visible(driver, InventoryPageUI.TOTAL_SHOPPING_CART, 10);
-        Assert.assertEquals(totalShoppingCart.getText(), "", "❌ The total number off products in the cart is incorrect!");
+        Assert.assertTrue(Validator.isTextEqual(totalShoppingCart.getText(), ""), "❌ The total number off products in the cart is incorrect!");
         inventoryPage.onclickYourCar();
 
-        Assert.assertEquals(driver.getCurrentUrl(), "https://www.saucedemo.com/cart.html", "Unable to switch pages.");
+        Assert.assertTrue(Validator.isTextEqual(driver.getCurrentUrl(), "https://www.saucedemo.com/cart.html"), "Unable to switch pages.");
         WebElement title = WaitElement.visible(driver, InventoryPageUI.CART_TITLE, 10);
-        Assert.assertEquals(title.getText(), "Your Cart", "Unable to switch pages.");
+        Assert.assertTrue(Validator.isTextEqual(title.getText(), "Your Cart"), "Unable to switch pages.");
     }
 
     @Test
@@ -72,12 +73,12 @@ public class InventoryTest extends Base {
         products = inventoryPage.addToCart(5);
 
         WebElement totalShoppingCartAdd = WaitElement.visible(driver, InventoryPageUI.TOTAL_SHOPPING_CART, 10);
-        Assert.assertEquals(products.size(), Integer.parseInt(totalShoppingCartAdd.getText()), "❌ The total number off products in the cart is incorrect!");
+        Assert.assertTrue(Validator.isNumberEqual(products.size(), Integer.parseInt(totalShoppingCartAdd.getText())), "❌ The total number off products in the cart is incorrect!");
 
         inventoryPage.removeProductAddedToCart(products, 3);
 
         WebElement totalShoppingCartAddAfterRemove = WaitElement.visible(driver, InventoryPageUI.TOTAL_SHOPPING_CART, 10);
-        Assert.assertEquals(totalShoppingCartAddAfterRemove.getText(), products.size() + "", "❌ The total number off products in the cart is incorrect!");
+        Assert.assertTrue(Validator.isTextEqual(totalShoppingCartAddAfterRemove.getText(), products.size() + ""), "❌ The total number off products in the cart is incorrect!");
 
     }
 
@@ -103,9 +104,9 @@ public class InventoryTest extends Base {
         List<Product> productsAfterSort = inventoryPage.getListProduct();
 
         for (int i = 0; i < productsAfterSort.size(); i++) {
-            Assert.assertEquals(productsBeforeSort.get(i).getPrice(), productsAfterSort.get(i).getPrice(), "The position remains unchanged.");
-            Assert.assertEquals(productsAfterSort.get(i).getName(), productsBeforeSort.get(i).getName(), "The position remains unchanged.");
-            Assert.assertEquals(productsAfterSort.get(i).getDesc(), productsBeforeSort.get(i).getDesc(), "The position remains unchanged.");
+            Assert.assertTrue(Validator.isNumberEqual(productsBeforeSort.get(i).getPrice(), productsAfterSort.get(i).getPrice()), "The position remains unchanged.");
+            Assert.assertTrue(Validator.isTextEqual(productsAfterSort.get(i).getName(), productsBeforeSort.get(i).getName()), "The position remains unchanged.");
+            Assert.assertTrue(Validator.isTextEqual(productsAfterSort.get(i).getDesc(), productsBeforeSort.get(i).getDesc()), "The position remains unchanged.");
         }
     }
 
@@ -117,9 +118,9 @@ public class InventoryTest extends Base {
         List<Product> productsAfterSort = inventoryPage.getListProduct();
 
         for (int i = 0; i < productsAfterSort.size(); i++) {
-            Assert.assertEquals(productsBeforeSort.get(i).getPrice(), productsAfterSort.get(i).getPrice(), "The position remains unchanged.");
-            Assert.assertEquals(productsAfterSort.get(i).getName(), productsBeforeSort.get(i).getName(), "The position remains unchanged.");
-            Assert.assertEquals(productsAfterSort.get(i).getDesc(), productsBeforeSort.get(i).getDesc(), "The position remains unchanged.");
+            Assert.assertTrue(Validator.isNumberEqual(productsBeforeSort.get(i).getPrice(), productsAfterSort.get(i).getPrice()), "The position remains unchanged.");
+            Assert.assertTrue(Validator.isTextEqual(productsAfterSort.get(i).getName(), productsBeforeSort.get(i).getName()), "The position remains unchanged.");
+            Assert.assertTrue(Validator.isTextEqual(productsAfterSort.get(i).getDesc(), productsBeforeSort.get(i).getDesc()), "The position remains unchanged.");
         }
     }
 
@@ -131,9 +132,9 @@ public class InventoryTest extends Base {
         List<Product> productsAfterSort = inventoryPage.getListProduct();
 
         for (int i = 0; i < productsAfterSort.size(); i++) {
-            Assert.assertEquals(productsBeforeSort.get(i).getPrice(), productsAfterSort.get(i).getPrice(), "The position remains unchanged.");
-            Assert.assertEquals(productsAfterSort.get(i).getName(), productsBeforeSort.get(i).getName(), "The position remains unchanged.");
-            Assert.assertEquals(productsAfterSort.get(i).getDesc(), productsBeforeSort.get(i).getDesc(), "The position remains unchanged.");
+            Assert.assertTrue(Validator.isNumberEqual(productsBeforeSort.get(i).getPrice(), productsAfterSort.get(i).getPrice()), "The position remains unchanged.");
+            Assert.assertTrue(Validator.isTextEqual(productsAfterSort.get(i).getName(), productsBeforeSort.get(i).getName()), "The position remains unchanged.");
+            Assert.assertTrue(Validator.isTextEqual(productsAfterSort.get(i).getDesc(), productsBeforeSort.get(i).getDesc()), "The position remains unchanged.");
         }
     }
 
