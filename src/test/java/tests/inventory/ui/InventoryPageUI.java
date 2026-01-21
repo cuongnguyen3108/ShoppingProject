@@ -3,7 +3,7 @@ package tests.inventory.ui;
 import org.openqa.selenium.By;
 
 public class InventoryPageUI {
-    public static final By ADD_TO_CART_BUTTON = By.xpath("./descendant::button");
+    public static final By BUTTON_PRODUCT_ITEM = By.xpath("./descendant::button");
     public static final By NAME_PRODUCT_ITEM = By.xpath("./descendant::div[@class=\"inventory_item_name \"]");
     public static final By PRICE_PRODUCT_ITEM = By.xpath("./descendant::div[@class=\"inventory_item_price\"]");
     public static final By DESC_PRODUCT_ITEM = By.xpath("./descendant::div[@class=\"inventory_item_desc\"]");

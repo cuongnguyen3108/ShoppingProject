@@ -26,7 +26,7 @@ public class InventoryPage {
 
         for (int i = 0; i < quantity; i++) {
             Product product = new Product();
-            WebElement btnAddToCartProduct = listProduct.get(i).findElement(InventoryPageUI.ADD_TO_CART_BUTTON);
+            WebElement btnAddToCartProduct = listProduct.get(i).findElement(InventoryPageUI.BUTTON_PRODUCT_ITEM);
             btnAddToCartProduct.click();
 
             WebElement nameProduct = listProduct.get(i).findElement(InventoryPageUI.NAME_PRODUCT_ITEM);
@@ -50,7 +50,7 @@ public class InventoryPage {
     public void removeProductAddedToCart(List<Product> products, int quantity) {
         List<WebElement> listProduct = WaitElement.visibleElements(driver, LoginPageUI.INVENTORY_ITEM, 10);
         for (int j = 0; j < quantity; j++) {
-            WebElement btnRemoveProductAddedToCart = listProduct.get(j).findElement(InventoryPageUI.ADD_TO_CART_BUTTON);
+            WebElement btnRemoveProductAddedToCart = listProduct.get(j).findElement(InventoryPageUI.BUTTON_PRODUCT_ITEM);
             btnRemoveProductAddedToCart.click();
 
             WebElement nameProduct = listProduct.get(j).findElement(By.xpath("./descendant::div[@class=\"inventory_item_name \"]"));
