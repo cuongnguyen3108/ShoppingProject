@@ -25,12 +25,12 @@ public class LoginTest extends Base {
 
     @Test
     public void userTestLoginWithValidCredentials() {
-        Assert.assertEquals(driver.getTitle(), "Swag Labs", "Title mismatch!");
-        Assert.assertEquals(driver.getCurrentUrl(), "https://www.saucedemo.com/", "URL mismatch!");
+        Assert.assertTrue(Validator.isTextEqual(driver.getTitle(), "Swag Labs"), "Title mismatch!");
+        Assert.assertTrue(Validator.isTextEqual(driver.getCurrentUrl(), "https://www.saucedemo.com/"), "URL mismatch!");
 
         loginPage.login("standard_user", "secret_sauce");
 
-        Assert.assertEquals(driver.getCurrentUrl(), "https://www.saucedemo.com/inventory.html", "Login failed");
+        Assert.assertTrue(Validator.isTextEqual(driver.getCurrentUrl(), "https://www.saucedemo.com/inventory.html"), "Login failed");
         WebElement appLogo = WaitElement.visible(driver, LoginPageUI.APP_LOGO, 10);
         Assert.assertTrue(Validator.validateElementDisplayed(appLogo), "Login failed");
         WebElement listProduct = WaitElement.visible(driver, LoginPageUI.INVENTORY_ITEM, 10);
@@ -42,8 +42,8 @@ public class LoginTest extends Base {
 
     @Test
     public void userTestLoginWithInvalidUsername() {
-        Assert.assertEquals(driver.getTitle(), "Swag Labs", "Title mismatch!");
-        Assert.assertEquals(driver.getCurrentUrl(), "https://www.saucedemo.com/", "URL mismatch!");
+        Assert.assertTrue(Validator.isTextEqual(driver.getTitle(), "Swag Labs"), "Title mismatch!");
+        Assert.assertTrue(Validator.isTextEqual(driver.getCurrentUrl(), "https://www.saucedemo.com/"), "URL mismatch!");
 
         loginPage.login("invalid_user", "secret_sauce");
 
@@ -54,8 +54,8 @@ public class LoginTest extends Base {
 
     @Test
     public void userTestLoginWithInvalidPassword() {
-        Assert.assertEquals(driver.getTitle(), "Swag Labs", "Title mismatch!");
-        Assert.assertEquals(driver.getCurrentUrl(), "https://www.saucedemo.com/", "URL mismatch!");
+        Assert.assertTrue(Validator.isTextEqual(driver.getTitle(), "Swag Labs"), "Title mismatch!");
+        Assert.assertTrue(Validator.isTextEqual(driver.getCurrentUrl(), "https://www.saucedemo.com/"), "URL mismatch!");
 
         loginPage.login("standard_user", "invalid_pass");
 
@@ -66,8 +66,8 @@ public class LoginTest extends Base {
 
     @Test
     public void userTestLoginWithEmptyUsername() {
-        Assert.assertEquals(driver.getTitle(), "Swag Labs", "Title mismatch!");
-        Assert.assertEquals(driver.getCurrentUrl(), "https://www.saucedemo.com/", "URL mismatch!");
+        Assert.assertTrue(Validator.isTextEqual(driver.getTitle(), "Swag Labs"), "Title mismatch!");
+        Assert.assertTrue(Validator.isTextEqual(driver.getCurrentUrl(), "https://www.saucedemo.com/"), "URL mismatch!");
 
         loginPage.login("", "secret_sauce");
 
@@ -78,8 +78,8 @@ public class LoginTest extends Base {
 
     @Test
     public void userTestLoginWithEmptyPassword() {
-        Assert.assertEquals(driver.getTitle(), "Swag Labs", "Title mismatch!");
-        Assert.assertEquals(driver.getCurrentUrl(), "https://www.saucedemo.com/", "URL mismatch!");
+        Assert.assertTrue(Validator.isTextEqual(driver.getTitle(), "Swag Labs"), "Title mismatch!");
+        Assert.assertTrue(Validator.isTextEqual(driver.getCurrentUrl(), "https://www.saucedemo.com/"), "URL mismatch!");
 
         loginPage.login("standard_user", "");
 
