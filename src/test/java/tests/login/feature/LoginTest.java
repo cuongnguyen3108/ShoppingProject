@@ -10,6 +10,7 @@ import tests.Base;
 import tests.login.action.LoginPage;
 import tests.login.ui.LoginPageUI;
 import vn.shopping.project.utils.WaitElement;
+import vn.shopping.project.utils.validation.Validator;
 
 public class LoginTest extends Base {
     LoginPage loginPage;
@@ -30,10 +31,12 @@ public class LoginTest extends Base {
         loginPage.login("standard_user", "secret_sauce");
 
         Assert.assertEquals(driver.getCurrentUrl(), "https://www.saucedemo.com/inventory.html", "Login failed");
+        WebElement appLogo = WaitElement.visible(driver, LoginPageUI.APP_LOGO, 10);
+        Assert.assertTrue(Validator.validateElementDisplayed(appLogo), "Login failed");
         WebElement listProduct = WaitElement.visible(driver, LoginPageUI.INVENTORY_ITEM, 10);
-        Assert.assertTrue(listProduct.isDisplayed(), "Login failed");
+        Assert.assertTrue(Validator.validateElementDisplayed(listProduct), "Login failed");
         WebElement sortProduct = WaitElement.visible(driver, LoginPageUI.INVENTORY_PRODUCT_SORT, 10);
-        Assert.assertTrue(sortProduct.isDisplayed(), "Login failed");
+        Assert.assertTrue(Validator.validateElementDisplayed(sortProduct), "Login failed");
 
     }
 
@@ -45,7 +48,7 @@ public class LoginTest extends Base {
         loginPage.login("invalid_user", "secret_sauce");
 
         WebElement errorMsg = WaitElement.visible(driver, LoginPageUI.ERROR_MESSAGE, 10);
-        Assert.assertTrue(errorMsg.isDisplayed(), "Error message not displayed!");
+        Assert.assertTrue(Validator.validateElementDisplayed(errorMsg), "Error message not displayed!");
         Assert.assertTrue(errorMsg.getText().contains("Username and password do not match"), "Unexpected error message!");
     }
 
@@ -57,7 +60,7 @@ public class LoginTest extends Base {
         loginPage.login("standard_user", "invalid_pass");
 
         WebElement errorMsg = WaitElement.visible(driver, LoginPageUI.ERROR_MESSAGE, 10);
-        Assert.assertTrue(errorMsg.isDisplayed(), "Error message not displayed!");
+        Assert.assertTrue(Validator.validateElementDisplayed(errorMsg), "Error message not displayed!");
         Assert.assertTrue(errorMsg.getText().contains("Username and password do not match"), "Unexpected error message!");
     }
 
@@ -69,7 +72,7 @@ public class LoginTest extends Base {
         loginPage.login("", "secret_sauce");
 
         WebElement errorMsg = WaitElement.visible(driver, LoginPageUI.ERROR_MESSAGE, 10);
-        Assert.assertTrue(errorMsg.isDisplayed(), "Error message not displayed!");
+        Assert.assertTrue(Validator.validateElementDisplayed(errorMsg), "Error message not displayed!");
         Assert.assertTrue(errorMsg.getText().contains("Username is required"), "Unexpected error message!");
     }
 
@@ -81,7 +84,7 @@ public class LoginTest extends Base {
         loginPage.login("standard_user", "");
 
         WebElement errorMsg = WaitElement.visible(driver, By.cssSelector("[data-test='error']"), 10);
-        Assert.assertTrue(errorMsg.isDisplayed(), "Error message not displayed!");
+        Assert.assertTrue(Validator.validateElementDisplayed(errorMsg), "Error message not displayed!");
         Assert.assertTrue(errorMsg.getText().contains("Password is required"), "Unexpected error message!");
     }
 

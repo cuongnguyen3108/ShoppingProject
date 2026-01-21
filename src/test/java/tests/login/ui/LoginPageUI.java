@@ -9,4 +9,5 @@ public class LoginPageUI {
     public static final By ERROR_MESSAGE  = By.cssSelector("[data-test='error']");
     public static final By INVENTORY_ITEM = By.xpath("//div[@class='inventory_item']");
     public static final By INVENTORY_PRODUCT_SORT =  By.className("product_sort_container");
+    public static final By APP_LOGO = By.className("app_logo");
 }
