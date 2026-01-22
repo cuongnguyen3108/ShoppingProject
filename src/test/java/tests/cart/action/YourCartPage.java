@@ -24,7 +24,6 @@ public class YourCartPage {
         if (actual.size() != expected.size()) {
             return false;
         }
-
         for (int i = 0; i < actual.size(); i++) {
             Product a = actual.get(i);
             Product e = expected.get(i);
@@ -52,7 +51,6 @@ public class YourCartPage {
             WebElement priceProduct = listElementProduct.get(i).findElement(YourCartPageUI.PRICE_PRODUCT_ITEM);
             String priceNumber = priceProduct.getText().replace("$", "");
             product.setPrice(Double.parseDouble(priceNumber));
-
 
             WebElement quantityProduct = listElementProduct.get(i).findElement(YourCartPageUI.QUANTITY_PRODUCT_ITEM);
             product.setQuantity(Integer.parseInt(quantityProduct.getText()));

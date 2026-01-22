@@ -11,11 +11,13 @@ public class Validator {
         return actual != null && expected != null &&
                 Double.compare(actual.doubleValue(), expected.doubleValue()) == 0;
     }
+
     public static boolean isNumberGreaterThan(Number actual, Number expected) {
         return actual != null
                 && expected != null
                 && actual.doubleValue() > expected.doubleValue();
     }
+
     public static boolean isNumberLessThan(Number actual, Number expected) {
         return actual != null
                 && expected != null
