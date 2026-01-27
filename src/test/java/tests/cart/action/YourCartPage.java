@@ -68,10 +68,11 @@ public class YourCartPage {
             btnRemove.click();
         }
     }
-//Checkout
+
     public void clickButtonContinueShopping() {
         WaitElement.clickable(driver, YourCartPageUI.BUTTON_CONTINUE, 15).click();
     }
+
     public void clickButtonCheckout() {
         WaitElement.clickable(driver, YourCartPageUI.BUTTON_CHECKOUT, 15).click();
     }
